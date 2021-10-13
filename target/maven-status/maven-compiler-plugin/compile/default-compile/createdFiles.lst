@@ -1,0 +1,12 @@
+vrd/base/GroupRepository.class
+vrd/Application.class
+vrd/base/Test.class
+vrd/base/TestRepository.class
+vrd/base/UserRepository.class
+vrd/ApiController.class
+vrd/base/User.class
+vrd/base/Group.class
+vrd/base/QuestRepository.class
+vrd/base/Answer.class
+vrd/base/Quest.class
+vrd/base/AnswerRepository.class
