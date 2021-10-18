@@ -2,13 +2,9 @@ package vrd.base;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
-@Data
-@NoArgsConstructor
+
 @Entity
 @Table(name = "answers")
 public class Answer {
@@ -27,6 +23,35 @@ public class Answer {
     @JoinColumn(name = "QUESTID")
     private Quest quest;
 
+    public Answer() {
+    }
 
+    public Answer(Test test, Quest quest) {
+        this.test = test;
+        this.quest = quest;
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Test getTest() {
+        return test;
+    }
+
+    public void setTest(Test test) {
+        this.test = test;
+    }
+
+    public Quest getQuest() {
+        return quest;
+    }
+
+    public void setQuest(Quest quest) {
+        this.quest = quest;
+    }
 }

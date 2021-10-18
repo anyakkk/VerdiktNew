@@ -29,6 +29,12 @@
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Калькулятор</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Справка</a>
+                </li>
             </ul>
 
         </div>
@@ -36,34 +42,45 @@
 </nav>
 
 
-<p></p>
 
-<div class="container-fluid m-0 p-0" style="padding: 5px; border-color: aliceblue"/>
-<div class="row">
-    <div class="col align-self-center">
-        <div class="shadow p-3 mb-5 bg-body rounded">
-            Вопрос 1
-        </div>
-    </div>
+    <style>
+        .block {
+            width: 100%;
+            height: auto;
+            padding: 5%;
+            position:relative;
+            font-family: "Gideon Roman";
+            background-color: aliceblue;
+            vertical-align: middle;
+        }
+        .center {
+            background: white;
+            max-width: 1000px;
+            min-height: 100vh;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
 
-    <div class="col align-self-center">
-        <div class="shadow p-3 mb-5 bg-body rounded">
-            <div style="height: 70%">
+        body {
+            background: #E6E6E6;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 
+<div class="center">
+    <div class="container" style="width: 500px">
+        <div class="shadow p-3 bg-body rounded" style="position: relative; top: 190px; background-color: aliceblue!important">
+            <div class="block">
+                <h4 class="text-center font-weight-bold">ВЕРДИКТ</h4>
+                <p class="text-center">Система контроля знаний.</p>
+                <p class="text-center">г.Вологда</p>
+                <p class="text-center">А.А.Кудрявцева</p>
             </div>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">Ответ</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-            </div>
         </div>
-    </div>
 
-    <div class="col align-self-center">
-        <div class="shadow p-3 mb-5 bg-body rounded">
-            <button type="button" class="btn btn-secondary">Следующий вопрос</button>
-        </div>
     </div>
-</div>
+    <button type="button" class="btn btn-secondary" style="position: relative; top: 210px; left: 42%">Перейти к тесту</button>
 </div>
 </body>
 </html>

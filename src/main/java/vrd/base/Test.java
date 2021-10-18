@@ -1,15 +1,12 @@
 package vrd.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@NoArgsConstructor
+
 @Entity
 @Table(name = "tableTest")
 public class Test {
@@ -31,5 +28,44 @@ public class Test {
     @JoinColumn(name = "USERID")
     private User user;
 
+    public Test() {
+    }
 
+    public Test(String nametest, Set<Quest> quests, User user) {
+        this.nametest = nametest;
+        this.quests = quests;
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNametest() {
+        return nametest;
+    }
+
+    public void setNametest(String nametest) {
+        this.nametest = nametest;
+    }
+
+    public Set<Quest> getQuests() {
+        return quests;
+    }
+
+    public void setQuests(Set<Quest> quests) {
+        this.quests = quests;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
