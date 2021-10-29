@@ -8,6 +8,37 @@
 
     <title>Verdikt</title>
 
+    <script>
+        // переменная, в которой хранится выбранное математическое действие
+        var op;
+
+        // функция расчёта
+        function func() {
+            // переменная для результата
+            var result;
+            // получаем первое и второе число
+            var num1 = Number(document.getElementById("num1").value);
+            var num2 = Number(document.getElementById("num2").value);
+            // смотрим, что было в переменной с действием, и действуем исходя из этого
+            switch (op) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+            }
+            document.getElementById("result").innerHTML = result;
+
+        }
+    </script>
+
 </head>
 <body>
 
@@ -31,6 +62,39 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Калькулятор</a>
+                        <div class="modal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Калькулятор</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input id="num1" />
+
+                                        <!-- блок с кнопками -->
+                                        <div id="operator_btns">
+                                            <button id="plus" onclick="op='+'">+</button>
+                                            <button id="minus" onclick="op='-'">-</button>
+                                            <button id="times" onclick="op='*'">x</button>
+                                            <button id="divide" onclick="op='/'">:</button>
+                                        </div>
+
+                                        <!-- поле ввода второго числа -->
+                                        <input id="num2" />
+                                        <br>
+
+                                        <!-- кнопка для рассчётов -->
+                                        <button onclick="func()">Посчитать</button>
+
+                                        <p id="result"></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Справка</a>
@@ -62,12 +126,24 @@
     <div class="container" style="padding: 5px; width:70%;height: 80vh">
         <p></p>
         <div class="numberquestion" style="text-align: center;">
-            <div class="shadow p-3 mb-5 bg-body rounded">
-                Вопрос 1
+            <div class="shadow p-3 mb-5 bg-body rounded" th:text="'Вопрос ' + ${nextQuestionId - 1}"></div>
+        </div>
+
+        <style>
+            .form-check{
+                height: 40px;
+            }
+        </style>
+
+
+        <div class="shadow p-3 mb-5 bg-body rounded" style="background-color: white; min-height: 35vh">
+            <div th:text="${text}">
+
             </div>
         </div>
 
-        <div class="questansw" style="height: 470px">
+
+        <div class="questansw" th:unless="${variant}" style="height: 470px">
             <div class="shadow p-3 mb-5 bg-body rounded" style="height: 470px;">
                 <div class="input-group mb-3" style="position: relative; top: 90%">
                     <span class="input-group-text" id="inputGroup-sizing-default">Ответ</span>
@@ -76,7 +152,16 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-secondary" style="position: relative; top: 5%; left: 35%">Следующий вопрос</button>
+        <div class="questans" th:if="${variant}">
+            <div class="form-check" th:each="answer : ${answers}">
+                <input type="radio" class="btn-check" name="options" th:id="${answer.id}" autocomplete="off">
+                <label class="btn btn-outline-secondary" th:for="${answer.id}" th:text="${answer.answerCont}" style="width: 100%; text-align: left;"></label>
+            </div>
+        </div>
+
+
+        <p></p>
+        <a type="button" th:href="'/test/' + ${testId} + '/run/' + ${nextQuestionId}" class="btn btn-secondary" style="position: relative; top: 5%; left: 35%">Следующий вопрос</a>
 
     </div>
 </div>

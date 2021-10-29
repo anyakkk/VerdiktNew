@@ -30,10 +30,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Калькулятор</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Справка</a>
+                    <a class="nav-link active" aria-current="page" href="#">Загрузить новый тест</a>
                 </li>
             </ul>
 
@@ -41,46 +38,30 @@
     </div>
 </nav>
 
-
-
-    <style>
-        .block {
-            width: 100%;
-            height: auto;
-            padding: 5%;
-            position:relative;
-            font-family: "Gideon Roman";
-            background-color: aliceblue;
-            vertical-align: middle;
-        }
-        .center {
-            background: white;
-            max-width: 1000px;
-            min-height: 100vh;
-            margin-left: 15%;
-            margin-right: 15%;
-        }
-
-        body {
-            background: #E6E6E6;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-
 <div class="center">
-    <div class="container" style="width: 500px">
-        <div class="shadow p-3 bg-body rounded" style="position: relative; top: 190px; background-color: aliceblue!important">
-            <div class="block">
-                <h4 class="text-center font-weight-bold">ВЕРДИКТ</h4>
-                <p class="text-center">Система контроля знаний.</p>
-                <p class="text-center">г.Вологда</p>
-                <p class="text-center">А.А.Кудрявцева</p>
-            </div>
-        </div>
-
+    <div th:if="${tests}" style="text-align: left" >
+        <a th:each="test: ${tests}" class="btn btn-outline-dark d-inline-block col-3" th:href="'/loadtest/'+${test.name}" style="height: 25vh; margin: 4.166%">
+           <h6 th:text="${test.name}"></h6>
+        </a>
     </div>
-    <a type="button" class="btn btn-secondary" th:href="'/test/' + ${testId} + '/run/0'" style="position: relative; top: 210px; left: 42%">Перейти к тесту</a>
 </div>
+
+<style>
+    .center {
+        background: white;
+        max-width: 1000px;
+        min-height: 100vh;
+        margin-left: 15%;
+        margin-right: 15%;
+        align-content: center;
+        text-align: center;
+    }
+
+    body {
+        background: #E6E6E6;
+        margin: 0;
+        padding: 0;
+    }
+</style>
 </body>
 </html>

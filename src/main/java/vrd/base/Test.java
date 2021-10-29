@@ -17,7 +17,7 @@ public class Test {
     private Long id;
 
     @Column(name = "NAMET")
-    String nametest;
+    String name;
 
     @JsonIgnore
     @OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
@@ -31,8 +31,8 @@ public class Test {
     public Test() {
     }
 
-    public Test(String nametest, Set<Quest> quests, User user) {
-        this.nametest = nametest;
+    public Test(String name, Set<Quest> quests, User user) {
+        this.name = name;
         this.quests = quests;
         this.user = user;
     }
@@ -45,12 +45,12 @@ public class Test {
         this.id = id;
     }
 
-    public String getNametest() {
-        return nametest;
+    public String getName() {
+        return name;
     }
 
-    public void setNametest(String nametest) {
-        this.nametest = nametest;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<Quest> getQuests() {

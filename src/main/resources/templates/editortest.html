@@ -29,58 +29,40 @@
                         <li><hr class="dropdown-divider"></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Калькулятор</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Справка</a>
-                </li>
             </ul>
 
         </div>
     </div>
 </nav>
 
-
-
-    <style>
-        .block {
-            width: 100%;
-            height: auto;
-            padding: 5%;
-            position:relative;
-            font-family: "Gideon Roman";
-            background-color: aliceblue;
-            vertical-align: middle;
-        }
-        .center {
-            background: white;
-            max-width: 1000px;
-            min-height: 100vh;
-            margin-left: 15%;
-            margin-right: 15%;
-        }
-
-        body {
-            background: #E6E6E6;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-
 <div class="center">
-    <div class="container" style="width: 500px">
-        <div class="shadow p-3 bg-body rounded" style="position: relative; top: 190px; background-color: aliceblue!important">
-            <div class="block">
-                <h4 class="text-center font-weight-bold">ВЕРДИКТ</h4>
-                <p class="text-center">Система контроля знаний.</p>
-                <p class="text-center">г.Вологда</p>
-                <p class="text-center">А.А.Кудрявцева</p>
-            </div>
+    <form action="#" th:action="@{/editor}" method="post">
+        <div style="padding-top: 2%">
+            <label style="width: 80%"> Название теста:  <input type="text" name="name" /></label>
         </div>
-
-    </div>
-    <a type="button" class="btn btn-secondary" th:href="'/test/' + ${testId} + '/run/0'" style="position: relative; top: 210px; left: 42%">Перейти к тесту</a>
+        <p></p>
+        <textarea name="code" style="height: 70vh; width: 80%; resize: none"></textarea>
+        <p></p>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Сохранить</button>
+    </form>
 </div>
+
+<style>
+    .center {
+        background: white;
+        max-width: 1000px;
+        min-height: 100vh;
+        margin-left: 15%;
+        margin-right: 15%;
+        align-content: center;
+        text-align: center;
+    }
+
+    body {
+        background: #E6E6E6;
+        margin: 0;
+        padding: 0;
+    }
+</style>
 </body>
 </html>

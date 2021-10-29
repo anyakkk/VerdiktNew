@@ -23,12 +23,25 @@ public class Answer {
     @JoinColumn(name = "QUESTID")
     private Quest quest;
 
+    @Column(name = "NAMECONTENT")
+    private String answerCont;
+
     public Answer() {
     }
 
-    public Answer(Test test, Quest quest) {
+    public Answer(long id, Test test, Quest quest, String cont) {
+        this.id = id;
         this.test = test;
         this.quest = quest;
+        this.answerCont = cont;
+    }
+
+    public String getAnswerCont() {
+        return answerCont;
+    }
+
+    public void setAnswerCont(String answerCont) {
+        this.answerCont = answerCont;
     }
 
     public Long getId() {

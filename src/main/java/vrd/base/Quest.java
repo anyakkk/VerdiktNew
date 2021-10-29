@@ -11,13 +11,20 @@ import java.util.Set;
 @Table(name = "questions")
 public class Quest {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "QUESTID")
     private Long id;
 
+    @Column(name = "VARIANT")
+    Boolean variant;
+
     @Column(name = "NAMEQ")
     String nameQuest;
+
+    @Column(name = "NEXTQ")
+    String nextQuest;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -32,14 +39,16 @@ public class Quest {
     @ManyToMany(mappedBy = "quests", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Set<Group> groups = new HashSet<>();
 
-    public Quest(String nameQuest, Test test, Set<Answer> answers, Set<Group> groups) {
+    public Quest(String nameQuest, String nextQuest, Test test, Set<Answer> answers, Set<Group> groups, Boolean variant) {
         this.nameQuest = nameQuest;
+        this.nextQuest = nextQuest;
         this.test = test;
         this.answers = answers;
         this.groups = groups;
+        this.variant = variant;
     }
 
-    public Quest(String nameQuest, Test test, Answer answer, Group  group) {
+    public Quest(String nameQuest, String nextQuest, Test test, Answer answer, Group  group, Boolean variant) {
 
     }
 
@@ -57,6 +66,22 @@ public class Quest {
 
     public void setNameQuest(String nameQuest) {
         this.nameQuest = nameQuest;
+    }
+
+    public Boolean getVariant() {
+        return variant;
+    }
+
+    public void setVariant(Boolean variant) {
+        this.variant = variant;
+    }
+
+    public String getNextQuest() {
+        return nextQuest;
+    }
+
+    public void setNextQuest(String nextQuest) {
+        this.nextQuest = nextQuest;
     }
 
     public Test getTest() {
