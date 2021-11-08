@@ -20,11 +20,8 @@ public class Quest {
     @Column(name = "VARIANT")
     Boolean variant;
 
-    @Column(name = "NAMEQ")
-    String nameQuest;
-
-    @Column(name = "NEXTQ")
-    String nextQuest;
+    @Column(name = "TEXT")
+    String text;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -39,17 +36,13 @@ public class Quest {
     @ManyToMany(mappedBy = "quests", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Set<Group> groups = new HashSet<>();
 
-    public Quest(String nameQuest, String nextQuest, Test test, Set<Answer> answers, Set<Group> groups, Boolean variant) {
-        this.nameQuest = nameQuest;
-        this.nextQuest = nextQuest;
-        this.test = test;
-        this.answers = answers;
-        this.groups = groups;
-        this.variant = variant;
+    public Quest() {
     }
 
-    public Quest(String nameQuest, String nextQuest, Test test, Answer answer, Group  group, Boolean variant) {
-
+    public Quest(String text, Test test, Boolean variant) {
+        this.text = text;
+        this.test = test;
+        this.variant = variant;
     }
 
     public Long getId() {
@@ -60,28 +53,12 @@ public class Quest {
         this.id = id;
     }
 
-    public String getNameQuest() {
-        return nameQuest;
-    }
-
-    public void setNameQuest(String nameQuest) {
-        this.nameQuest = nameQuest;
-    }
-
     public Boolean getVariant() {
         return variant;
     }
 
     public void setVariant(Boolean variant) {
         this.variant = variant;
-    }
-
-    public String getNextQuest() {
-        return nextQuest;
-    }
-
-    public void setNextQuest(String nextQuest) {
-        this.nextQuest = nextQuest;
     }
 
     public Test getTest() {
@@ -108,5 +85,11 @@ public class Quest {
         this.groups = groups;
     }
 
+    public String getText() {
+        return text;
+    }
 
+    public void setText(String text) {
+        this.text = text;
+    }
 }

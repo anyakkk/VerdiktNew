@@ -15,25 +15,30 @@ public class Answer {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "TESTID")
-    private Test test;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "QUESTID")
     private Quest quest;
 
     @Column(name = "NAMECONTENT")
     private String answerCont;
 
+    @Column(name = "NAMEORDER")
+    private byte order;
+
     public Answer() {
     }
 
-    public Answer(long id, Test test, Quest quest, String cont) {
-        this.id = id;
-        this.test = test;
+    public Answer(byte order, Quest quest, String cont) {
+        this.order = order;
         this.quest = quest;
         this.answerCont = cont;
+    }
+
+    public byte getOrder() {
+        return order;
+    }
+
+    public void setOrder(byte order) {
+        this.order = order;
     }
 
     public String getAnswerCont() {
@@ -44,22 +49,6 @@ public class Answer {
         this.answerCont = answerCont;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
-    }
-
     public Quest getQuest() {
         return quest;
     }
@@ -67,4 +56,5 @@ public class Answer {
     public void setQuest(Quest quest) {
         this.quest = quest;
     }
+
 }

@@ -6,33 +6,32 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Entity
-@Table(name = "tableTest")
-public class Test {
-
+@Table(name = "currenttest")
+public class CurrentTest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "TESTID")
+    @Column(name = "ID")
     private Long id;
-
-    @Column(name = "NAMET")
-    String name;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    Set<Quest> quests = new HashSet<>();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "USERID")
+    @JoinColumn(name = "TESTID")
+    private Test test;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<CurrentQuestion> questions = new HashSet<>();
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
-    public Test() {}
+    public CurrentTest() {
+    }
 
-
-    public Test(String name) {
-        this.name = name;
+    public CurrentTest(Test test) {
+        this.test = test;
     }
 
     public Long getId() {
@@ -43,20 +42,20 @@ public class Test {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Test getTest() {
+        return test;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTest(Test test) {
+        this.test = test;
     }
 
-    public Set<Quest> getQuests() {
-        return quests;
+    public Set<CurrentQuestion> getQuestions() {
+        return questions;
     }
 
-    public void setQuests(Set<Quest> quests) {
-        this.quests = quests;
+    public void setQuestions(Set<CurrentQuestion> questions) {
+        this.questions = questions;
     }
 
     public User getUser() {

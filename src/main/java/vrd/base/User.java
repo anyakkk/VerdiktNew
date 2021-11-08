@@ -17,10 +17,13 @@ public class User {
     private Long id;
 
     @Column(name = "NAMEUSER")
-    private String nameuser;
+    private String username;
 
     @Column(name = "USERPASSWORD")
-    private String userpassword;
+    private String password;
+
+    @Column(name = "PASSWORDCONFIRM")
+    private String passwordConfirm;
 
     @Column(name = "ROLE")
     private String role;
@@ -31,6 +34,10 @@ public class User {
     private Set<Test> tests = new HashSet<>();
 
     @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<CurrentTest> currentTests = new HashSet<>();
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "NAMEUSERGROUP")
     private UserGroup userGroup;
@@ -38,11 +45,11 @@ public class User {
     public User() {
     }
 
-    public User(String nameuser, String userpassword, String role, Set<Test> tests) {
-        this.nameuser = nameuser;
-        this.userpassword = userpassword;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
         this.tests = tests;
-        this.role = role;
+        this.currentTests = currentTests;
     }
 
     public Long getId() {
@@ -53,28 +60,20 @@ public class User {
         this.id = id;
     }
 
-    public String getNameuser() {
-        return nameuser;
+    public String getUsername() {
+        return username;
     }
 
-    public void setNameuser(String nameuser) {
-        this.nameuser = nameuser;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserpassword() {
-        return userpassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserpassword(String userpassword) {
-        this.userpassword = userpassword;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setPassword(String userpassword) {
+        this.password = userpassword;
     }
 
     public Set<Test> getTests() {
@@ -83,6 +82,14 @@ public class User {
 
     public void setTests(Set<Test> tests) {
         this.tests = tests;
+    }
+
+    public Set<CurrentTest> getCurrentTests() {
+        return currentTests;
+    }
+
+    public void setCurrentTests(Set<CurrentTest> currentTests) {
+        this.currentTests = currentTests;
     }
 }
 
