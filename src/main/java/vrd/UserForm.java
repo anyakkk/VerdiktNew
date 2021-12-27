@@ -4,6 +4,8 @@ public class UserForm {
     private String username = "";
     private String password = "";
     private String passwordConfirm = "";
+    private boolean isTeacher = false;
+
 
     public String getUsername() {
         return username;
@@ -27,5 +29,13 @@ public class UserForm {
 
     public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
+    }
+
+    public boolean getIsTeacher() {
+        return isTeacher;
+    }
+
+    public void setIsTeacher(boolean teacher) {
+        isTeacher = teacher;
     }
 }

@@ -8,6 +8,21 @@
 
     <title>Verdikt</title>
 
+    <script>
+        // Clears the screen on click of C button.
+        function clearScreen() {
+            document.getElementById("result").value = "";
+        }
+        // Displays entered value on screen.
+        function liveScreen(value) {
+            let res = document.getElementById("result");
+            if(res.value == "undefined"){
+                res.value = "";
+            }
+            res.value += value;
+        }
+    </script>
+
 </head>
 <body>
 
@@ -24,6 +39,7 @@
                     <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Пользователь
                     </a>
+
                     <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
                         <li><a class="dropdown-item" href="/logout">Выйти</a></li>
                         <li><hr class="dropdown-divider"></li>
@@ -36,8 +52,10 @@
 </nav>
 
 <div class="center">
+    <a class="btn btn-outline-secondary" href="/editor" style="margin: 30px">Создать тест</a>
+    <a class="btn btn-outline-secondary" href="/stat" style="margin: 30px">Перейти к статистике</a>
     <div th:if="${tests}" style="text-align: left" >
-        <a th:each="test: ${tests}" class="btn btn-outline-dark d-inline-block col-3" th:href="'/loadtest/'+${test.name}" style="height: 25vh; margin: 4.166%">
+        <a th:each="test: ${tests}" class="btn btn-outline-dark d-inline-block col-3" th:href="'/session/'+${test.id}" style="height: 25vh; margin: 4.166%">
            <h6 th:text="${test.name}"></h6>
         </a>
     </div>
@@ -60,5 +78,6 @@
         padding: 0;
     }
 </style>
+
 </body>
 </html>

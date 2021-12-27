@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "questionsgroup")
+@Table(name = "QUESTGROUP")
 public class Group {
 
     @Id
@@ -20,17 +20,22 @@ public class Group {
     @JoinColumn(name = "TESTID")
     private Test test;
 
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "QUESTID")
+    @ManyToMany(mappedBy = "groups", fetch = FetchType.EAGER)
     private Set<Quest> quests = new HashSet<>();
+
+    @Column(name = "NAMEORDER")
+    private int order;
+
+    @Column(name = "QUESTCOUNT")
+    int questCount;
 
     public Group() {
     }
 
-    public Group(Test test, Set<Quest> quests) {
+    public Group(Test test, Set<Quest> quests, int questCount) {
         this.test = test;
         this.quests = quests;
+        this.questCount = questCount;
     }
 
     public Long getId() {
@@ -56,4 +61,23 @@ public class Group {
     public void setQuests(Set<Quest> quests) {
         this.quests = quests;
     }
+
+    public int getOrder() {
+        return order;
+
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public int getQuestCount() {
+        return questCount;
+    }
+
+    public void setQuestCount(int questCount) {
+        this.questCount = questCount;
+    }
+
+
 }

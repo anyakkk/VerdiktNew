@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -17,11 +18,20 @@ public class Test {
     private Long id;
 
     @Column(name = "NAMET")
-    String name;
+    private String name;
+
+    @Column(name = "NAMEHEADER")
+    private String header;
+
+     @Column(name = "NAMERELATE", length = 4096)
+     private String relations;
 
     @JsonIgnore
     @OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    Set<Quest> quests = new HashSet<>();
+    private Set<Quest> quests = new HashSet<>();
+
+    @OneToMany(mappedBy = "test", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Group> groups = new HashSet<>();
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
@@ -29,7 +39,6 @@ public class Test {
     private User user;
 
     public Test() {}
-
 
     public Test(String name) {
         this.name = name;
@@ -51,6 +60,14 @@ public class Test {
         this.name = name;
     }
 
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
+    }
+
     public Set<Quest> getQuests() {
         return quests;
     }
@@ -65,5 +82,21 @@ public class Test {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getRelations() {
+        return relations;
+    }
+
+    public void setRelations(String relations) {
+        this.relations = relations;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 }

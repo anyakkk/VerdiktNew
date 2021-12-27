@@ -40,6 +40,16 @@
                 <div>
                     <label> Подтвердите пароль: <input type="password" name="passwordConfirm" th:field="${form.passwordConfirm}"/> </label>
                 </div>
+                <p></p>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" th:field="${form.isTeacher}" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Я преподаватель
+                    </label>
+                </div>
+
+
 
                 <p></p>
                 <div th:if="${passwordError}">

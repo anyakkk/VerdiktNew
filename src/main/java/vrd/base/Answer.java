@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ANSWERID")
+    @Column(name = "ANSWERID", nullable = false)
     private Long id;
 
     @JsonIgnore
@@ -22,23 +22,35 @@ public class Answer {
     private String answerCont;
 
     @Column(name = "NAMEORDER")
-    private byte order;
+    private int order;
+
+    @Column(name = "CORRECT")
+    boolean correct;
 
     public Answer() {
     }
 
-    public Answer(byte order, Quest quest, String cont) {
+    public Answer(int order, Quest quest, String cont, Boolean correct) {
         this.order = order;
         this.quest = quest;
         this.answerCont = cont;
+        this.correct = correct;
     }
 
-    public byte getOrder() {
+    public int getOrder() {
         return order;
     }
 
-    public void setOrder(byte order) {
+    public void setOrder(int order) {
         this.order = order;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAnswerCont() {
@@ -57,4 +69,12 @@ public class Answer {
         this.quest = quest;
     }
 
+
+    public boolean isCorrect() {
+        return correct;
+    }
+
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
+    }
 }

@@ -3,6 +3,7 @@ package vrd.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +28,29 @@ public class CurrentTest {
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @Column(name = "DATESTART")
+    private Date dateStart;
+
+    @Column(name = "CLOSED")
+    private boolean closed;
+
+    public boolean checkOpen() {
+        long currentDate = new Date().getTime();
+        long difference = (currentDate - dateStart.getTime()) / (60L*1000L);
+
+        return (difference <= session.getTime()) && !closed;
+    }
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Session session;
+
     public CurrentTest() {
+    }
+
+    public CurrentTest(Test test, User user) {
+        this.test = test;
+        this.user = user;
     }
 
     public CurrentTest(Test test) {
@@ -58,11 +81,35 @@ public class CurrentTest {
         this.questions = questions;
     }
 
+    public Session getSession() {
+        return session;
+    }
+
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 }

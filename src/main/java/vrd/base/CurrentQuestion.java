@@ -3,6 +3,7 @@ package vrd.base;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "currentquestion")
@@ -23,6 +24,8 @@ public class CurrentQuestion {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "QUESTID")
     private Quest quest;
+
+    Integer answer;
 
     public CurrentQuestion() {
     }
@@ -63,5 +66,13 @@ public class CurrentQuestion {
 
     public void setQuest(Quest quest) {
         this.quest = quest;
+    }
+
+    public Integer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Integer answer) {
+        this.answer = answer;
     }
 }

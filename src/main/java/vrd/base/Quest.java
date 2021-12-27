@@ -20,7 +20,7 @@ public class Quest {
     @Column(name = "VARIANT")
     Boolean variant;
 
-    @Column(name = "TEXT")
+    @Column(name = "TEXT", length = 8000)
     String text;
 
     @JsonIgnore
@@ -28,12 +28,11 @@ public class Quest {
     @JoinColumn(name = "TESTID")
     private Test test;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "quest", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     Set<Answer> answers = new HashSet<>();
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "quests", cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Set<Group> groups = new HashSet<>();
 
     public Quest() {
@@ -89,7 +88,9 @@ public class Quest {
         return text;
     }
 
+
     public void setText(String text) {
         this.text = text;
     }
+
 }
