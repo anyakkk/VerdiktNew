@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script th:text="'var testId = ' + ${testId}">
+    </script>
+
+    <script th:text="'var nextQuestion = ' + ${nextQuestionId}">
+    </script>
+
+    <script>
+        function clearScreen() {
+            document.getElementById("result").value = "";
+        }
+        function liveScreen(value) {
+            let res = document.getElementById("result");
+            if(res.value == "undefined"){
+                res.value = "";
+            }
+            res.value += value;
+        }
+    </script>
+
+    <script>
+        function buttonNext() {
+            let result = "";
+
+            let field = document.getElementById("input-text");
+            if (field != null) {
+                result = field.value;
+            } else {
+                let radios = document.querySelectorAll('input[type="radio"]');
+                for (let radio of radios) {
+                    if (radio.checked) {
+                        result = radio.value.toString();
+                        break;
+                    }
+                }
+            }
+
+            if (result.length > 0) {
+                axios.get("/test/" + testId + "/send/" + (nextQuestion - 1), {
+                    withCredentials: true,
+                    params: {
+                        "data": result
+                    }
+                }).then(() => {
+                    location.replace("/test/" + testId + "/run/" + nextQuestion);
+                });
+            }
+        }
+    </script>
+
+    <title>Verdikt</title>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand">Вердикт</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Пользователь
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                        <li><a class="dropdown-item" href="/logout">Выйти</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#ModalCalc" style="margin-right: 10px">
+                        Калькулятор
+                    </button>
+                    <div class="modal" id="ModalCalc" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Калькулятор</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="wrapper">
+                                        <div class="container">
+                                            <div class="first-row">
+                                                <input type="text" name="result" class="result" id="result" value="" placeholder="Результат" readonly />
+                                                <input type="button" value="C" onclick="clearScreen()" id="clear" />
+                                            </div>
+                                            <div class="second-row">
+                                                <input type="button" value="1" onclick="liveScreen(1)" id="one" />
+                                                <input type="button" value="2" onclick="liveScreen(2)" id="two" />
+                                                <input type="button" value="3" id="three" onclick="liveScreen(3)" />
+                                                <input type="button" value="+" onclick="liveScreen('+')" />
+                                            </div>
+                                            <div class="third-row">
+                                                <input type="button" value="4" id="four" onclick="liveScreen(4)" />
+                                                <input type="button" value="5" id="five" onclick="liveScreen(5)" />
+                                                <input type="button" value="6" id="six" onclick="liveScreen(6)" />
+                                                <input type="button" value="-" onclick="liveScreen('-')" />
+                                            </div>
+                                            <div class="fourth-row">
+                                                <input type="button" value="7" id="seven" onclick="liveScreen(7)" />
+                                                <input type="button" value="8" id="eight" onclick="liveScreen(8)" />
+                                                <input type="button" value="9" id="nine" onclick="liveScreen(9)" />
+                                                <input type="button" value="x" onclick="liveScreen('*')" />
+                                            </div>
+                                            <div class="fifth-row">
+                                                <input type="button" value="/" onclick="liveScreen('/')" />
+                                                <input type="button" value="0" id="zero" onclick="liveScreen(0)" />
+                                                <input type="button" value="." class="dot" onclick="liveScreen('.')" />
+                                                <input type="button" value="=" onclick="result.value = eval(result.value)" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </li>
+
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#Modal">
+                        Справка
+                    </button>
+                    <div class="modal" id="Modal" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Справка</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Задания делятся на 2 типа: с вариантом ответа и требующие ответа в специальном поле.</p>
+                                    <p>Вернуться к предыдущему вопросу нельзя.</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<style>
+    .center {
+        background: white;
+        max-width: 1000px;
+        min-height: 100vh;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    body {
+        background: #E6E6E6;
+        margin: 0;
+        padding: 0;
+    }
+
+    .code-container {
+        min-width: 600px;
+        text-align: left;
+        margin: auto;
+    }
+</style>
+
+<div class="center" style="background-color: aliceblue!important;">
+    <div class="container" style="padding: 5px; width:70%;height: 80vh">
+        <p></p>
+        <div class="numberquestion" style="text-align: center;">
+            <div class="shadow p-3 mb-5 bg-body rounded" th:text="'Вопрос ' + ${nextQuestionId}"></div>
+        </div>
+
+        <style>
+            .form-check{
+                height: 40px;
+            }
+        </style>
+
+
+
+        <div class="shadow p-3 mb-5 bg-body rounded" style="background-color: white; min-height: 35vh">
+            <div class="code-container">
+                <div th:each="line: ${text}" th:text="${line}" style="width: 100%; padding: 0; margin: 0">
+                </div>
+            </div>
+            <div th:if="${currentTestError}">
+                <div class="error">Такого теста не существует</div>
+            </div>
+        </div>
+
+
+        <div class="questansw" th:unless="${variant}">
+            <div class="shadow p-3 mb-5 bg-body rounded">
+                <div class="input-group mb-3" style="position: relative">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Ответ</span>
+                    <input id="input-text" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+        </div>
+
+       <div class="questans" th:if="${variant}">
+           <div class="form-check" th:each="answer : ${answers}">
+               <input type="radio" th:value="${answer.order}" class="btn-check" name="options" th:id="${answer.order}" autocomplete="off">
+                <label class="btn btn-outline-secondary" th:for="${answer.order}" th:text="${answer.answerCont}" style="width: 100%; text-align: left;"></label>
+            </div>
+      </div>
+
+        <p></p>
+        <a type="button" onclick="buttonNext()" class="btn btn-secondary" style="position: relative; top: 5%; left: 35%">Следующий вопрос</a>
+
+    </div>
+
+</div>
+</body>
+</html>
