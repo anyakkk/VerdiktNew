@@ -3,6 +3,9 @@ package vrd;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vrd.base.*;
+import vrd.repository.CurrentQuestionRepository;
+import vrd.repository.CurrentTestRepository;
+import vrd.repository.GroupRepository;
 
 import java.util.*;
 

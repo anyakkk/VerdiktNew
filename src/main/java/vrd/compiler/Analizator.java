@@ -3,6 +3,7 @@ package vrd.compiler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import vrd.base.*;
+import vrd.repository.*;
 
 import java.util.*;
 

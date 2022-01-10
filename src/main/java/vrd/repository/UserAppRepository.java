@@ -1,6 +1,10 @@
-package vrd.base;
+package vrd.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import vrd.base.Session;
+import vrd.base.StatusApp;
+import vrd.base.User;
+import vrd.base.UserApp;
 
 import java.util.Optional;
 import java.util.Set;

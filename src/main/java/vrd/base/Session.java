@@ -41,7 +41,6 @@ public class Session {
     @Column(name = "SESSIONTIME")
     private int sessionTime;
 
-
     public boolean checkOpen() {
         long currentDate = new Date().getTime();
         long difference = (currentDate - dateStart.getTime()) / (60L * 1000L);

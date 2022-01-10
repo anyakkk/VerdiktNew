@@ -1,6 +1,8 @@
-package vrd.base;
+package vrd.repository;
 
 import org.springframework.data.repository.CrudRepository;
+import vrd.base.CurrentQuestion;
+import vrd.base.CurrentTest;
 
 import java.util.Optional;
 
